@@ -1,0 +1,43 @@
+server:
+  port: 8443
+  http2:    enabled: true
+  ssl:
+    key-store-type: jks
+    key-store: classpath:vgate.jks
+    key-store-password: vgate
+    key-alias: localhost
+    enabled: true
+    
+    trust-store: classpath:client-truststore.jks
+    trust-store-type: jks
+    trust-store-password: wso2carbon
+  
+logging:  level:    reactor: debug 
+    
+spring:
+  security:    oauth2:      client:        registration:          facebook:
+            client-id: 221472518902988
+            client-secret: 65870a3978846a74011b25242859b92e
+           ## redirect-uri: https://localhost
+  devtools:    add-properties: false
+  application:
+    name: api-gateway    cloud:
+    gateway:
+      x-forwarded:
+        enabled: false
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 2s
+        ssl:
+          useInsecureTrustManager: true
+          handshake-timeout: 10000
+          close-notify-flush-timeout: 3000
+          close-notify-read-timeout: 0
+        wiretap: false
+      routes:
+      - id: path_route
+        uri: https://localhost:8080
+        predicates:
+        - Path=/hello
+      httpserver:
+        wiretap : false

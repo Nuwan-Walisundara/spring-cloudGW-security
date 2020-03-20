@@ -1,0 +1,14 @@
+
+
+pluginManagement {
+    repositories {
+        maven {
+            url 'http://nexus.selfcare.virtusa.com:8081/repository/gradle-plugin'
+        }
+        gradlePluginPortal()
+        ivy {
+            url 'http://nexus.selfcare.virtusa.com:8081/repository/gradle-plugin'
+        }
+    }
+}
+rootProject.name = 'gateway'
